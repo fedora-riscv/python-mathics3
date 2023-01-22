@@ -68,8 +68,14 @@ export USE_CYTHON=1
 %pyproject_save_files mathics
 
 %check
-# TODO: file an upstream bug for this
-%pytest --deselect=test/test_strings.py::test_string_split
+# test_string_split: https://github.com/Mathics3/mathics-core/issues/743
+# test_system_specific_long_integer:
+# https://github.com/Mathics3/mathics-core/issues/760
+%pytest \
+%ifarch s390x
+  --deselect=test/test_evaluation.py::test_system_specific_long_integer \
+%endif
+  --deselect=test/test_strings.py::test_string_split
 
 %files -n mathics -f %{pyproject_files}
 %license COPYING.txt
