@@ -33,6 +33,9 @@ Recommends:     mathics-data = %{version}-%{release}
 Provides:       python-mathics3 = %{version}-%{release}
 Provides:       mathics3 = %{version}-%{release}
 
+# Needed for pkg_resources which is used in mathics/settings.py
+Requires:       python3dist(setuptools)
+
 %description -n mathics %_description
 
 %package -n     mathics-data
